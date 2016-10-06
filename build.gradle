@@ -1,0 +1,98 @@
+group = gradle.projectGroupId
+version = gradle.projectVersion
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.21'
+    compile group: 'org.springframework', name: 'spring-context', version:'4.3.3.RELEASE'
+    compile group: 'org.aspectj', name: 'aspectjweaver', version:'1.8.9'
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+def ossrhUsername = System.getenv("ossrhUsername") ?: ossrhUsername
+def ossrhPassword = System.getenv("ossrhPassword") ?: ossrhPassword
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'com.github.greatermkemeetup:jscientist'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'A library for running experimental code paths and comparing the results.'
+                url 'https://github.com/GreaterMKEMeetup/jscientist'
+
+                scm {
+                    connection 'scm:git:git://github.com/GreaterMKEMeetup/jscientist.git'
+                    developerConnection 'scm:git:ssh://github.com:GreaterMKEMeetup/jscientist.git'
+                    url 'https://github.com/GreaterMKEMeetup/jscientist'
+                }
+
+                licenses {
+                    license {
+                        name 'MIT License'
+                        url 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'aglassman'
+                        name 'Andrew Glassman'
+                        email 'andrew.glassman@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+build.dependsOn install
