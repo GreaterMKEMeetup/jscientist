@@ -32,8 +32,8 @@ public String sayHello(@RequestParam String name) {
 public class HelloThere {
 
 	public String sayHello(String name) {
-		String trimName = name.trim().toUpperCase();
-		return "Hello " + trimName;
+		String upperName = name.trim().toUpperCase();
+		return "Hello " + upperName;
 	}
 
 }
