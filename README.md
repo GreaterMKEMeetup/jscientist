@@ -46,12 +46,13 @@ Assume the following two requests were made to the @Experimental method.
 
 
 ```
-sayHello("DAVE");
-log - BasicResult{experimentName='TEST-hello', status=FAILED, message='control.equals(candidate) == false', control=Hello DAVE, controlRt=11, candidate=Hello DAVE, candidateRt=0}
-
 sayHello("Dave");
-log - BasicResult{experimentName='TEST-hello', status=PASSED, message='control.equals(candidate) == true', control=Hello Dave, controlRt=0, candidate=Hello DAVE, candidateRt=0}
+log - BasicResult{experimentName='TEST-hello', status=FAILED, message='control.equals(candidate) == false', control=Hello Dave, controlRt=11, candidate=Hello DAVE, candidateRt=0}
+
+sayHello("DAVE");
+log - BasicResult{experimentName='TEST-hello', status=PASSED, message='control.equals(candidate) == true', control=Hello DAVE, controlRt=0, candidate=Hello DAVE, candidateRt=0}
 ```
+As you can see, the first log states the Result statis is FAILED. This is because the resulting String objects did not match.  In the second case, the Result statis is PASSED since the String objects are equal. 
 
 # Using Spring's @Profile
 
