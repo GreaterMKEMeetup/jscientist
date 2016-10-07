@@ -1,5 +1,5 @@
 # jscientist
-A library that supports running parallel code paths, and inspecting the results.
+A library that supports running parallel code paths, and inspecting the results.  Based off of the [Scientist: Measure Twice, Cut Over Once](http://githubengineering.com/scientist/) post on the GitHub [Engineering blog](http://githubengineering.com/).
 
 # Concept
 **jscientist** is a library that is meant to allow you run experimental code paths at runtime, capture the resulting objects, and compare them.
