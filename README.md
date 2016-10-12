@@ -3,7 +3,7 @@ A library that supports running parallel code paths, and inspecting the results.
 
 # Concept
 **jscientist** is a library that is meant to allow you run experimental code paths at runtime, capture the resulting objects, and compare them.
-When woring on large and complex legacy code bases, it can be risky to refactor parts of the code.  The goal of this library is
+When working on large and complex legacy code bases, it can be risky to refactor parts of the code.  The goal of this library is
 to pick up where unit, and  integration test fall short.  Many times, the effort to setup unit and integration tests on these complex
 code bases is too high to justify.  It is a much better option to cover as much as possible with unit / integration tests, and then use **jscientist**
 to cover the remaining risk in QA environments. It is possible, but not recommended to run **jscientist** in product code at the moment.
