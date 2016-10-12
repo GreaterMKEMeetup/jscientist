@@ -52,7 +52,7 @@ log - BasicResult{experimentName='TEST-hello', status=FAILED, message='control.e
 sayHello("DAVE");
 log - BasicResult{experimentName='TEST-hello', status=PASSED, message='control.equals(candidate) == true', control=Hello DAVE, controlRt=0, candidate=Hello DAVE, candidateRt=0}
 ```
-As you can see, the first log states the Result statis is FAILED. This is because the resulting String objects did not match.  In the second case, the Result statis is PASSED since the String objects are equal. 
+As you can see, the first log states the Result status is FAILED. This is because the resulting String objects did not match.  In the second case, the Result status is PASSED since the String objects are equal. 
 
 # Using Spring's @Profile
 
